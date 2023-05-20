@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.10
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/Warwick-Plasma/epoch:
+      branch: main
+      repo: https://github.com/Warwick-Plasma/epoch
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/Warwick-Plasma/epoch git:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-firebrick-caterpillar.sh
+        container: qc.acc_droopy-asparagus-budgerigar
+  QC.Doc:
+    repos:
+      github.com/Warwick-Plasma/epoch find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-wisteria-cichlid.sh
+        container: qc.doc_breezy-yellow-mayfly
+      github.com/Warwick-Plasma/epoch git:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-denim-seal.sh
+        container: qc.doc_skanky-taupe-gerbil
+      github.com/Warwick-Plasma/epoch markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-rose-husky.sh
+        container: qc.doc_tacky-chestnut-loon
+  QC.Lic:
+    repos:
+      github.com/Warwick-Plasma/epoch licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-silver-spider.sh
+        container: qc.lic_leaky-yellow-terrier
+  QC.Sec:
+    repos:
+      github.com/Warwick-Plasma/epoch bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-white-liger.sh
+        container: qc.sec_nerdy-grey-insect
+  QC.Sty:
+    repos:
+      github.com/Warwick-Plasma/epoch flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-rust-insect.sh
+        container: qc.sty_cheeky-ultramarine-dugong
+  QC.Ver:
+    repos:
+      github.com/Warwick-Plasma/epoch get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-ochre-orangutan.sh
+        container: qc.ver_flimsy-flax-frigatebird
+timeout: 5400
